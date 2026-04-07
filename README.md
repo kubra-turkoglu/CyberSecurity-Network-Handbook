@@ -42,7 +42,48 @@ graph LR
     style Main fill:#2d333b,stroke:#58a6ff,color:#fff
     style Security fill:#442d2d,stroke:#f85149,color:#fff
 ```
+## New
+```mermaid
+graph LR
+    %% Main Node
+    Main[Network Fundamentals for Cybersecurity] --> Types[Network Types]
+    Main --> Arch[Network Architecture]
+    Main --> Proto[Addressing & Protocols]
+    Main --> Hardware[Network Hardware]
+    Main --> Security[Security & Monitoring]
 
+    %% Network Types (Görsel Destekli)
+    Types --> SOHO[SOHO & Home Office]
+    Types --> Enterprise[Medium / Large / Campus]
+    Types --> WAN[WAN & Cloud Connectivity]
+    SOHO --- S1[Basic Routers/APs]
+    Enterprise --- E1[VLAN Segmentation / Redundancy]
+    WAN --- W1[VPNs / SD-WAN / Leased Lines]
+
+    %% Architecture (Görsel Destekli)
+    Arch --> Layers[Hierarchical Layers]
+    Layers --> L1[Core / Distribution / Access]
+    Arch --> Seg[Security Zones]
+    Seg --> L2[DMZ / Trusted / Untrusted]
+
+    %% Protocols (Görsel Destekli)
+    Proto --> L3[IP Addressing: Classes A-B-C]
+    Proto --> Services[Translation: Static/Dynamic NAT / PAT]
+    Proto --> Discovery[Discovery: ARP / DHCP / DNS]
+
+    %% Hardware (Görsel Destekli)
+    Hardware --> Inter[Intermediate: L2-L3 Switches / Firewalls / WAPs]
+    Hardware --> End[End Devices: PC-Laptops / Servers / IoT]
+
+    %% Security (Blue Team Fokus)
+    Security --> Analysis[Monitoring: SPAN / NetFlow / SNMP]
+    Security --> Defense[Analysis: Wireshark / Malicious Flow / IR]
+
+    %% Styling
+    style Main fill:#2d333b,stroke:#58a6ff,color:#fff
+    style Security fill:#442d2d,stroke:#f85149,color:#fff
+    style Arch fill:#1f3d3d,stroke:#3fb950,color:#fff
+```
 ## 📌 Repository Modules
 
 ### 1. Network Types & Topologies
