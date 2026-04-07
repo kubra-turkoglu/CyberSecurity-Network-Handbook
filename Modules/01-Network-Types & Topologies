@@ -1,0 +1,77 @@
+# 🏠 SOHO (Small Office Home Office) Networks
+### Module 01: Network Types & Topologies - Part A
+
+In the global network hierarchy, **SOHO** represents the foundational level of Local Area Networks (LAN). While simple and cost-effective, from a **Blue Team** perspective, SOHO environments often represent the most vulnerable "attack surface" due to a lack of professional defense-in-depth strategies.
+
+---
+
+## 🔍 Definition & Scale
+A SOHO network is a "Small LAN" typically designed for:
+*   **User Count:** 5 to 20 users (Freelancers, small businesses, home users).
+*   **Device Count:** 1 to 20 endpoints.
+*   **Primary Goal:** Connectivity and ease of management over security complexity.
+
+---
+
+## 🏗️ Technical Architecture vs. Enterprise
+Unlike medium or large enterprise networks that utilize a **Three-Tier Hierarchical Model** (Core, Distribution, Access), SOHO networks rely on a simplified approach.
+
+
+| Feature | SOHO (Small LAN) | Enterprise LAN |
+| :--- | :--- | :--- |
+| **Topology** | Simple / Flat | Multi-tier (Hierarchical) |
+| **Hardware** | All-in-one Modem/Router | Managed Switches, NGFW, IDS/IPS |
+| **Redundancy** | Single Point of Failure | High (Dual-homing, redundant paths) |
+| **Segmentation** | Rare (Single Broadcast Domain) | Advanced (VLANs, DMZs, VRFs) |
+
+### Common SOHO Hardware:
+*   **All-in-One Devices:** A single unit handling Routing, Switching, Firewalling, and Wireless Access.
+*   **Endpoints:** Laptops, Smartphones, Printers, and IoT devices.
+*   **Storage:** Network Attached Storage (NAS) units (Often the primary target for Ransomware).
+
+---
+
+## 🛡️ Cyber Security Perspective: The Vulnerability Map
+
+SOHO networks are often considered "low-hanging fruit" for attackers. Here is a breakdown of the security risks:
+
+### 1. Lack of Network Segmentation
+*   **The Issue:** Most SOHO networks lack **VLANs**. Every device sits on the same flat network.
+*   **Security Impact:** If an attacker compromises a smart lightbulb (IoT), they can move **laterally** to a laptop containing sensitive financial data with zero internal barriers.
+
+### 2. Single Point of Failure (SPOF)
+*   **The Issue:** The entire network depends on one consumer-grade router.
+*   **Security Impact:** A successful exploit of the router’s firmware or a hardware failure results in a **Total Network Compromise** or a complete outage.
+
+### 3. Layer 2 Vulnerabilities
+*   **The Issue:** Use of unmanaged switches.
+*   **Attack Vector:** These devices lack **Port Security**. They are susceptible to **MAC Flooding** attacks, which can force the switch to act as a hub, allowing an attacker to sniff all traffic using tools like Wireshark.
+
+### 4. Absence of DMZ (Demilitarized Zone)
+*   **The Issue:** Internal services (like a NAS or a local web server) are often exposed via simple **Port Forwarding**.
+*   **Security Impact:** Without a DMZ to isolate public-facing services from the internal data tier, a breached service provides direct access to the private network.
+
+---
+
+## 🔍 Reconnaissance & Attack Scenarios
+
+Attackers target SOHO networks during the **Reconnaissance phase** using the following methods:
+
+1.  **Port Scanning (Nmap):** Identifying open ports such as:
+    *   `22 (SSH)` / `23 (Telnet)`: Attempting brute force on management interfaces.
+    *   `80/443 (HTTP/S)`: Exploiting outdated web-based router management pages.
+    *   `3389 (RDP)`: Targeting exposed remote desktops.
+2.  **Service Exploitation:** Finding outdated software versions (e.g., `vsftpd 2.3.4`) that contain known backdoors for unauthorized command execution.
+3.  **NAT Obfuscation:** While **PAT (Port Address Translation)** hides internal IPs, it is not a security feature. Attackers can use techniques like "STUN" or "PCP" to bypass simple NAT filters.
+
+---
+
+## 🚀 Blue Team Hardening Checklist for SOHO
+*   [ ] **Firmware Updates:** Regularly update the all-in-one router to patch known vulnerabilities.
+*   [ ] **Disable UPnP:** Prevent devices from automatically opening ports on the firewall.
+*   [ ] **Strong Encryption:** Use WPA3 (or WPA2-AES) and disable WPS (Wi-Fi Protected Setup).
+*   [ ] **Guest Network:** Use the "Guest Wi-Fi" feature to isolate IoT devices from sensitive data.
+*   [ ] **Logging:** Enable remote logging (Syslog) if possible to track unauthorized access attempts.
+
+---
+*Next Module: [Enterprise & Campus Architecture](./Enterprise-Arch.md)*
