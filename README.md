@@ -116,7 +116,7 @@ This table provides a comprehensive overview of common network protocols, their 
 ## 🚀 Project Objectives
 This project aims to integrate theoretical networking with practical **SOC Analysis**, **Penetration Testing**, and **Network Security** processes.
 
-# How to use this handbook:
+### How to use this handbook:
 1.  **Clone the Repo:** Explore the modules in numeric order.
 2.  **Lab Exercises:** Check the `/Labs` folder for PCAP samples and Cisco Packet Tracer files.
 3.  **Contribute:** Contributions to Blue Team hardening guides are welcome!
