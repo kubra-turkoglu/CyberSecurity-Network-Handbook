@@ -43,40 +43,38 @@ graph LR
     style Security fill:#442d2d,stroke:#f85149,color:#fff
 ```
 
-## 📌 Content Guide
-
-I am detailing the impact of networking on cybersecurity under the following headings:
-
-### 1. [OSI Model & Protocol Analysis](./Cheat-Sheets/networking-protocols.md)
-- **Layered Security:** Attacks occurring at specific layers (L2 - MAC Spoofing, L3 - IP Spoofing, L4 - SYN Flood).
-- **Critical Ports:** Vulnerability analysis of commonly used services (SSH, HTTP, SMB, FTP).
-
-### 2. [DHCP Deep Dive (DORA Process)](./DHCP-Analysis/dhcp-process.md)
-- **DORA Process:** Technical breakdown of Discover, Offer, Request, and Acknowledge steps.
-- **Cybersecurity Note:** Rogue DHCP Server attacks and protection methods with DHCP Snooping.
-
-### 3. [NAT & PAT Analysis](./NAT-PAT-DeepDive/nat-vs-pat.md)
-- **IP Saving vs. Security:** Internet access scenarios for Private IP blocks.
-- **Static NAT:** Securely exposing servers to the outside world.
-- **PAT (NAT Overload):** Logic of port-based address translation.
-
-### 4. [Network Architectures & Topologies](./Lab-Topologies/enterprise-arch.md)
-- **SOHO vs. Enterprise:** Transition from small office networks to campus networks.
-- **Hierarchical Design:** Roles of Access, Distribution, and Core layers.
-- **Vulnerability Analysis:** Single Point of Failure and Redundancy.
-
+📌 Repository Modules1. Network Types & TopologiesSOHO vs Enterprise: Understanding attack surfaces in different environments.WAN Security: How data travels securely over untrusted links.2. Hierarchical ArchitectureThe 3-Layer Model: Access, Distribution, and Core layers.Network Segmentation: Implementing VLANs and DMZs to contain lateral movement.3. Addressing & ProtocolsIP & Subnetting: Logical boundaries and broadcast domains.Gateway Services: Deep dive into NAT/PAT from a log analysis perspective.Critical Services: Security analysis of ARP, DHCP (DORA), and DNS.4. Network HardwareL2/L3 Devices: How switches and routers make forwarding decisions.Security Appliances: The role of Next-Gen Firewalls and IDS/IPS in the flow.5. Security & MonitoringTraffic Analysis: Mastering Wireshark and PCAP analysis for incident response.Hardening: Applying Access Control Lists (ACLs) and Port Security.
 ---
 
-## 🛠️ Key Information Table
+# Network Protocol Security & Analysis Table
+
+This table provides a comprehensive overview of common network protocols, their security status, and key focus areas for Blue Team operations.
 
 
-| Protocol | Port | Layer | Security Status |
-| :--- | :--- | :--- | :--- |
-| **FTP** | 21 | L7 (App) | Unencrypted / vsftpd backdoor risk |
-| **SSH** | 22 | L7 (App) | Encrypted / Secure Management |
-| **DNS** | 53 | L7 (App) | DNS Poisoning / Tunneling risk |
-| **HTTP** | 80 | L7 (App) | Unencrypted / Sniffing risk |
-| **TCP** | - | L4 (Trans) | 3-Way Handshake / Connection-oriented |
+| Protocol | Port | Layer | Security Status | Blue Team Focus | Attack Vector |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **ARP** | - | L2 | 🔴 Unencrypted | Dynamic ARP Inspection (DAI) / Static Tables | ARP Poisoning / MITM |
+| **ICMP** | - | L3 | 🟠 No Auth | ICMP Tunneling Detection / Rate Limiting | Ping of Death / Smurf DoS |
+| **TCP** | - | L4 | 🟡 Connection-oriented | 3-Way Handshake Monitoring / SYN Analysis | SYN Flood / Session Hijacking |
+| **DHCP** | 67/68 | L7 (App) | 🟠 Unencrypted | DHCP Snooping / Port Security | Rogue DHCP / Starvation |
+| **DNS** | 53 | L7 (App) | 🟠 Poisoning Risk | Query Logging / DNSSEC / Tunneling Check | Cache Poisoning / Exfiltration |
+| **FTP** | 21 | L7 (App) | 🔴 Unencrypted | Disable Anonymous / Monitor Cleartext | vsftpd Backdoor / Sniffing |
+| **SSH** | 22 | L7 (App) | 🟢 Encrypted | Key-based Auth / Brute Force Monitoring | Brute Force / Credential Stuffing |
+| **HTTP** | 80 | L7 (App) | 🔴 Unencrypted | WAF Implementation / Force HTTPS | Sniffing / XSS / SQLi |
+| **HTTPS** | 443 | L7 (App) | 🟢 Encrypted | TLS Inspection / Certificate Validation | Malicious Payload Delivery |
+| **Telnet** | 23 | L7 (App) | 🔴 Unencrypted | **Decommission** / Traffic Sniffing Alert | Credential Sniffing / MITM |
+| **SMTP** | 25/587 | L7 (App) | 🟡 Mixed | SPF, DKIM, DMARC / Mail Relay Check | Email Spoofing / Spam Relay |
+| **POP3** | 110/995 | L7 (App) | 🟡 Mixed | Enforce SSL (995) / Log monitoring | Brute Force / Sniffing |
+| **IMAP** | 143/993 | L7 (App) | 🟡 Mixed | Enforce SSL (993) / Anomaly Detection | Credential Stuffing / Phishing |
+| **NTP** | 123 | L7 (App) | 🟠 No Auth | NTP Stratum Monitoring / Restrict Monlist | NTP Amplification (DoS) |
+| **NetBIOS**| 137-139| L7 (App) | 🔴 Unencrypted | Disable on WAN / Monitor SMB Relay | Name Poisoning / LLMNR Spoofing |
+| **RDP** | 3389 | L7 (App) | 🟠 Vulnerable | Network Level Auth (NLA) / VPN Only | BlueKeep / Brute Force |
+
+### Legend
+*   🟢 **Secure**: Encrypted by default.
+*   🟡 **Neutral**: Depends on configuration (e.g., STARTTLS).
+*   🟠 **Weak**: Lacks inherent authentication or encryption.
+*   🔴 **Critical**: Transmits data in cleartext or highly vulnerable.
 
 ---
 
