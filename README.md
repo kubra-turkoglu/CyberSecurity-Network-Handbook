@@ -5,7 +5,7 @@ This repository is a comprehensive guide for those aiming to specialize in cyber
 
 > "If you don't understand the network, you cannot defend it."
 
-```mermaid
+//```mermaid
 graph TD
     A[Network Architecture Documentation] --> B[SOHO Networks]
     A --> C[Enterprise Networks]
@@ -30,7 +30,45 @@ graph TD
     Q --> T[Attacker Usage]
     R --> S
     R --> T
+```//
+
+graph LR
+    %% Main Node
+    Main[Network Fundamentals for Cybersecurity] --> Types[Network Types]
+    Main --> Arch[Network Architecture]
+    Main --> Proto[Addressing & Protocols]
+    Main --> Hardware[Network Hardware]
+    Main --> Security[Security & Monitoring]
+
+    %% Network Types
+    Types --> SOHO[SOHO: Small Office Home Office]
+    Types --> Enterprise[Enterprise / Campus]
+    Types --> WAN[WAN & Cloud Connectivity]
+
+    %% Architecture
+    Arch --> Layers[Hierarchical Layers]
+    Layers --> L1[Access / Distribution / Core]
+    Arch --> Seg[Segmentation]
+    Seg --> L2[VLANs / DMZ / Guest Net]
+
+    %% Protocols
+    Proto --> L3[IP Addressing & Subnetting]
+    Proto --> Services[Gateway Services: NAT / PAT]
+    Proto --> Discovery[Discovery: ARP / DHCP / DNS]
+
+    %% Hardware
+    Hardware --> Inter[Intermediate: Switches / Routers / Firewalls]
+    Hardware --> End[End Devices: Laptops / IoT / Servers]
+
+    %% Security
+    Security --> Analysis[Protocol Analysis: Wireshark / PCAP]
+    Security --> Defense[Defense: IDS / IPS / ACLs]
+
+    %% Styling
+    style Main fill:#2d333b,stroke:#58a6ff,color:#fff
+    style Security fill:#442d2d,stroke:#f85149,color:#fff
 ```
+
 ## 📌 Content Guide
 
 I am detailing the impact of networking on cybersecurity under the following headings:
