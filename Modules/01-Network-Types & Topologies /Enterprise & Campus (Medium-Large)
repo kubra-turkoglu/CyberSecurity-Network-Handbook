@@ -1,1 +1,70 @@
+# 🏢 Enterprise & Campus Networks
+### Module 01: Network Types & Topologies
 
+Medium to Large Enterprise networks represent a sophisticated leap in complexity from SOHO setups. From a **Blue Team** perspective, these environments are defined by **Hierarchical Architecture**, **Defense-in-Depth**, and specialized hardware designed to protect high-impact assets.
+
+---
+
+## 📊 Scale and Scope
+The density of an Enterprise LAN requires professional-grade management:
+*   **Medium LANs:** 20 to 200 devices (e.g., schools, mid-sized businesses).
+*   **Large LANs:** 200 to thousands of devices (e.g., University campuses, corporate HQs, Data Centers).
+
+---
+
+## 🏗️ Hierarchical Architecture & Tiered Security
+Unlike "flat" SOHO networks, Enterprise environments utilize a **Core – Distribution – Access** topology to ensure scalability and granular security control.
+
+### 1. The 3-Tier Security Advantage
+A critical defensive strategy in these environments is the implementation of a 3-tier model:
+*   **Web Tier:** Interacts with the public internet.
+*   **Application Tier:** Processes logic and business rules.
+*   **Data Tier:** Securely stores databases and sensitive files.
+
+> **Security Value:** In this model, a Web App never queries a database directly. It sends a request to the **Application Tier**, which provides a "yes/no" answer. This prevents a compromised web server from being used to dump an entire database of hashed passwords.
+
+### 2. DMZ Strategy
+Large networks utilize a **Demilitarized Zone (DMZ)** to isolate high-risk assets that must be internet-accessible, ensuring that a compromise in the DMZ has minimal impact on the internal "trusted" network.
+
+---
+
+## 🛡️ Advanced Defensive Controls
+Enterprise networks are distinguished by their **Defense-in-Depth** strategy:
+
+*   **VLAN Segmentation:** Virtual LANs limit the **"Blast Radius"** of an attack, preventing unauthorized lateral movement between departments (e.g., stopping a breach in Marketing from reaching HR).
+*   **Security Hardware:** Deployment of Next-Generation Firewalls (**NGFW**), Intrusion Detection/Prevention Systems (**IDS/IPS**), and Network Access Control (**NAC**).
+*   **Centralized Management:** Services like Active Directory (**AD**), DNS, and DHCP are centralized to ensure consistent security policies across thousands of devices.
+
+---
+
+## 🔍 Vulnerabilities & Blue Team Mitigations
+
+Despite advanced defenses, Enterprise networks face specific large-scale threats:
+
+
+| Attack Vector | Technical Description | Blue Team Mitigation |
+| :--- | :--- | :--- |
+| **MAC Flooding** | Exhausting switch memory to force traffic broadcasting. | Implement **Port Security** to limit allowed MACs per port. |
+| **SYN Flooding** | Exploiting the TCP 3-way handshake to exhaust connection tables. | Use Firewalls for session limits or **SYN Cookies**. |
+| **Reconnaissance** | Using Nmap for host discovery and version detection (e.g., vsftpd 2.3.4). | Disable unnecessary services and implement **IPS** signatures. |
+
+---
+
+## ⚖️ Strategic Advantages vs. Risks
+
+
+
+| Feature | Cybersecurity Benefit | Associated Risk |
+| :--- | :--- | :--- |
+| **Redundancy** | High availability and Fault Tolerance. | **Complexity:** Can lead to misconfigurations. |
+| **Scalability** | Growth without sacrificing security posture. | **Attack Surface:** Increases as device count grows. |
+| **Managed Hardware** | Granular control (Port Security, VLANs). | **Overhead:** Requires specialized expert management. |
+
+---
+
+## 🚀 Summary for the Analyst
+While Enterprise networks offer high-performance redundancy and layered security, their **complexity** is a double-edged sword. A single architectural design error can potentially impact the entire infrastructure. Constant monitoring of logs and traffic patterns is mandatory.
+
+---
+*Previous Module: [SOHO Networks](./SOHO.md)*  
+*Next Module: [WAN & Cloud Connectivity](./WAN-Cloud.md)*
