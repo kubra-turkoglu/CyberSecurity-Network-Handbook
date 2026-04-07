@@ -1,7 +1,7 @@
 # 🏢 Enterprise & Campus Networks
-### Module 01: Network Types & Topologies
+### Module 01: Network Types & Topologies - Part B
 
-Medium to Large Enterprise networks represent a sophisticated leap in complexity from SOHO setups. From a **Blue Team** perspective, these environments are defined by **Hierarchical Architecture**, **Defense-in-Depth**, and specialized hardware designed to protect high-impact assets.
+Medium to Large Enterprise networks represent a sophisticated leap in complexity from SOHO setups. From a **Blue Team** perspective, these environments are defined by **Hierarchical Architecture**, **Strategic Segmentation**, and **High Availability**.
 
 ---
 
@@ -28,12 +28,19 @@ Large networks utilize a **Demilitarized Zone (DMZ)** to isolate high-risk asset
 
 ---
 
-## 🛡️ Advanced Defensive Controls
-Enterprise networks are distinguished by their **Defense-in-Depth** strategy:
+## 🛡️ Strategic Defense: Segmentation & Redundancy
 
-*   **VLAN Segmentation:** Virtual LANs limit the **"Blast Radius"** of an attack, preventing unauthorized lateral movement between departments (e.g., stopping a breach in Marketing from reaching HR).
-*   **Security Hardware:** Deployment of Next-Generation Firewalls (**NGFW**), Intrusion Detection/Prevention Systems (**IDS/IPS**), and Network Access Control (**NAC**).
-*   **Centralized Management:** Services like Active Directory (**AD**), DNS, and DHCP are centralized to ensure consistent security policies across thousands of devices.
+In a professional environment, security is built on two pillars: **Containing the threat** and **Ensuring the service**.
+
+### 1. VLAN Segmentation (Containing the Threat)
+Virtual LANs (VLANs) are used to segment the network into smaller, isolated broadcast domains.
+*   **Preventing Lateral Movement:** If an attacker compromises a workstation in the *Sales* VLAN, they are blocked from accessing the *Server* or *Finance* VLANs.
+*   **Limiting the Blast Radius:** Segmentation ensures that a malware outbreak is contained within a single department rather than spreading across the entire organization.
+
+### 2. Redundancy & Fault Tolerance (Ensuring Availability)
+Redundancy is the practice of including extra components (Switches, Firewalls, Links) so that a system continues to work even if one part fails.
+*   **Availability (CIA Triad):** From a security standpoint, redundancy protects the **Availability** of the network against hardware failure or DoS attacks.
+*   **Failover Mechanisms:** If a primary Firewall is overwhelmed or crashes, a secondary "Standby" device automatically takes over the traffic (High Availability - HA).
 
 ---
 
@@ -53,18 +60,17 @@ Despite advanced defenses, Enterprise networks face specific large-scale threats
 ## ⚖️ Strategic Advantages vs. Risks
 
 
-
 | Feature | Cybersecurity Benefit | Associated Risk |
 | :--- | :--- | :--- |
 | **Redundancy** | High availability and Fault Tolerance. | **Complexity:** Can lead to misconfigurations. |
-| **Scalability** | Growth without sacrificing security posture. | **Attack Surface:** Increases as device count grows. |
-| **Managed Hardware** | Granular control (Port Security, VLANs). | **Overhead:** Requires specialized expert management. |
+| **VLANs** | Granular control and lateral movement prevention. | **VLAN Hopping:** Potential for attackers to jump between segments if misconfigured. |
+| **Managed Hardware** | Granular control (Port Security, ACLs). | **Overhead:** Requires specialized expert management. |
 
 ---
 
 ## 🚀 Summary for the Analyst
-While Enterprise networks offer high-performance redundancy and layered security, their **complexity** is a double-edged sword. A single architectural design error can potentially impact the entire infrastructure. Constant monitoring of logs and traffic patterns is mandatory.
+While Enterprise networks offer high-performance redundancy and layered security, their **complexity** is a double-edged sword. A single architectural design error or a misconfigured VLAN can potentially impact the entire infrastructure. Constant monitoring of logs and traffic patterns is mandatory.
 
 ---
-*Previous Module: [SOHO Networks](./SOHO.md)*  
+*Previous Module: [SOHO Networks](./SOHO & Home Office.md)*  
 *Next Module: [WAN & Cloud Connectivity](./WAN-Cloud.md)*
