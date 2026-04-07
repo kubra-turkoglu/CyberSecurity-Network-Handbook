@@ -1,0 +1,71 @@
+# 🌐 WAN & Cloud Connectivity
+### Module 01: Network Types & Topologies
+
+At the top of the network hierarchy sits the **Wide Area Network (WAN)**. It serves as the connective tissue for global communication, linking SOHO and Enterprise LANs across vast distances. From a **Blue Team** perspective, WANs are untrusted environments that require robust encryption and tunneling to protect data in transit.
+
+---
+
+## 🗺️ WAN Infrastructure & Scope
+WANs are large-scale networks managed by ISPs, governments, and major corporations.
+*   **Physical Media:** Relies on fiber-optic backbones, undersea cables, and satellite links.
+*   **The Gateway:** While switches manage internal traffic, **Routers** are the critical devices that define the WAN boundary. A WAN is effectively formed where routers come into play.
+*   **Security Profile:** By default, WANs are high-latency, low-security environments highly exposed to remote attacks compared to internal LANs.
+
+---
+
+## 🔒 Secure Connectivity: VPN & SD-WAN
+Because data travels over untrusted public infrastructure, the Blue Team must implement encrypted "tunnels."
+
+### 1. Virtual Private Networks (VPN)
+VPNs create secure, encrypted pipes across the internet. They are a primary tool for **Hardening** high-risk services.
+*   **Blue Team Strategy:** Never expose services like **RDP (Port 3389)** directly to the internet. Access should only be allowed via a VPN tunnel.
+
+#### 🛠️ Common VPN Protocols & Ports:
+
+| Protocol | Port | Security Note |
+| :--- | :--- | :--- |
+| **OpenVPN** | 1194 | Highly flexible and secure. |
+| **L2TP** | 1701 | Usually paired with IPsec for encryption. |
+| **PPTP** | 1723 | Older protocol, generally considered weak/obsolete. |
+| **IPsec** | 500 / 4500 | Industry standard for Site-to-Site tunnels. |
+
+### 2. SD-WAN & MPLS
+*   **SD-WAN (Software-Defined WAN):** A modern approach to managing global office connections with centralized control and enhanced security policies.
+*   **MPLS:** Provides dedicated, managed paths between offices, often used for performance and reliability.
+
+---
+
+## ☁️ Cloud Integration Models
+Organizations integrate remote computing resources into their local topologies using two primary models:
+
+1.  **Public Cloud:** External datacenters (AWS, Azure, GCP) accessible via the internet/WAN. Security relies heavily on **APIs**, **IAM**, and **NGFWs** at the cloud edge.
+2.  **Private Cloud:** Integrated directly into the company’s network and managed by internal teams. This allows for granular control over resource allocation and security.
+
+---
+
+## 🛰️ The Routing Process: "Hop-by-Hop"
+When a packet travels across a WAN, its identity changes at the data-link layer:
+*   **IP Addresses (L3):** The Source and Destination IPs stay **constant** throughout the journey.
+*   **MAC Addresses (L2):** The MAC address **changes at every router (hop)**. As the packet moves from one segment to another, it is repackaged by the router for the next link.
+
+---
+
+## 🔍 Cybersecurity Summary: WAN & Cloud
+
+
+
+| Feature | WAN / Cloud Perspective |
+| :--- | :--- |
+| **PDU Handling** | Packets routed via constant IPs; MACs change every hop. |
+| **Attack Surface** | Extremely high; exposed to global scans and DDoS. |
+| **Key Defenses** | VPN Tunnels, SD-WAN, and Next-Gen Firewalls (NGFW). |
+| **Risk Mitigation** | Encrypting all sensitive traffic; "Zero Trust" approach. |
+
+---
+
+## 🚀 Summary for the Analyst
+WAN and Cloud connectivity offer global reach but represent an **inherently untrusted** environment. The Blue Team's priority is to ensure that no internal asset is exposed to the WAN without encryption (VPN) and strict stateful firewall inspection.
+
+---
+*Previous Module: [Enterprise & Campus Networks](./Enterprise.md)*  
+*Next Module: [Hierarchical Architecture](./Modules/02-Architecture/README.md)*
