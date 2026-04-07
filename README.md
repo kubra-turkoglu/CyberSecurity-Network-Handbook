@@ -1,48 +1,14 @@
 # CyberSecurity-Network-Handbook
 # 🛡️ Network Fundamentals for Blue Teaming & Cyber Security
 
-This repository is a comprehensive guide for those aiming to specialize in cybersecurity, covering critical network fundamentals, protocol analysis, and network architectures from a cybersecurity perspective.
+This repository is a comprehensive guide to understanding network fundamentals from a **Cybersecurity** perspective. It follows a structured approach from basic connectivity to advanced security monitoring.
 
-> "If you don't understand the network, you cannot defend it."
+> "If you don't understand the network, you cannot defend it. A defender's advantage is knowing the terrain better than the adversary."
 
-```mermaid
-graph LR
-    %% Main Node
-    Main[Network Fundamentals for Cybersecurity] --> Types[Network Types]
-    Main --> Arch[Network Architecture]
-    Main --> Proto[Addressing & Protocols]
-    Main --> Hardware[Network Hardware]
-    Main --> Security[Security & Monitoring]
+## 🗺️ Master Architecture
 
-    %% Network Types
-    Types --> SOHO[SOHO: Small Office Home Office]
-    Types --> Enterprise[Enterprise / Campus]
-    Types --> WAN[WAN & Cloud Connectivity]
+This diagram represents the full scope of this handbook, blending core networking with defensive security concepts.
 
-    %% Architecture
-    Arch --> Layers[Hierarchical Layers]
-    Layers --> L1[Access / Distribution / Core]
-    Arch --> Seg[Segmentation]
-    Seg --> L2[VLANs / DMZ / Guest Net]
-
-    %% Protocols
-    Proto --> L3[IP Addressing & Subnetting]
-    Proto --> Services[Gateway Services: NAT / PAT]
-    Proto --> Discovery[Discovery: ARP / DHCP / DNS]
-
-    %% Hardware
-    Hardware --> Inter[Intermediate: Switches / Routers / Firewalls]
-    Hardware --> End[End Devices: Laptops / IoT / Servers]
-
-    %% Security
-    Security --> Analysis[Protocol Analysis: Wireshark / PCAP]
-    Security --> Defense[Defense: IDS / IPS / ACLs]
-
-    %% Styling
-    style Main fill:#2d333b,stroke:#58a6ff,color:#fff
-    style Security fill:#442d2d,stroke:#f85149,color:#fff
-```
-## New
 ```mermaid
 graph LR
     %% Main Node
@@ -84,31 +50,38 @@ graph LR
     style Security fill:#442d2d,stroke:#f85149,color:#fff
     style Arch fill:#1f3d3d,stroke:#3fb950,color:#fff
 ```
-## 📌 Repository Modules
+## 📂 Repository Structure & Modules
 
-### 1. Network Types & Topologies
-- **SOHO vs Enterprise:** Understanding attack surfaces in different environments.
-- **WAN Security:** How data travels securely over untrusted links.
+### 1. [Network Types & Topologies](./Modules/01-Network-Types/)
+*Focus: Understanding the attack surface in different environments.*
+*   **SOHO & Remote Office:** Securing basic home/office gateways.
+*   **Enterprise (Campus):** High availability, redundancy, and VLAN security.
+*   **WAN & Cloud:** Securing data in transit via VPNs and SD-WAN.
 
-### 2. Hierarchical Architecture
-- **The 3-Layer Model:** Access, Distribution, and Core layers.
-- **Network Segmentation:** Implementing VLANs and DMZs to contain lateral movement.
-  
-### 3. Addressing & Protocols
-- **IP & Subnetting:** Logical boundaries and broadcast domains.
-- **Gateway Services:** Deep dive into NAT/PAT from a log analysis perspective.
-- **Critical Services:** Security analysis of ARP, DHCP (DORA), and DNS.
-  
-### 4. Network Hardware
-- **L2/L3 Devices:** How switches and routers make forwarding decisions.
-- **Security Appliances:** The role of Next-Gen Firewalls and IDS/IPS in the flow.
-  
-### 5. Security & Monitoring
-- **Traffic Analysis:** Mastering Wireshark and PCAP analysis for incident response.
-- **Hardening:** Applying Access Control Lists (ACLs) and Port Security.
+### 2. [Network Architecture & Design](./Modules/02-Architecture/)
+*Focus: Structural defense and segmentation.*
+*   **The 3-Layer Model:** Roles of Core, Distribution, and Access layers.
+*   **Security Zones:** Architecting DMZs, Trusted Internal Networks, and Untrusted External boundaries.
+
+### 3. [Addressing & Protocol Analysis](./Modules/03-Protocols/)
+*Focus: How data moves and how it's intercepted.*
+*   **IP Fundamentals:** Classes (A/B/C), Subnetting, and logical boundaries.
+*   **Address Translation:** Security implications of Static/Dynamic NAT and PAT (Overload).
+*   **Discovery Services:** Deep dive into **ARP** (MITM), **DHCP** (Snooping), and **DNS** (Exfiltration).
+
+### 4. [Network Hardware & Endpoints](./Modules/04-Hardware/)
+*Focus: Hardening the physical and virtual assets.*
+*   **Intermediary Devices:** L2/L3 Switches, Routers, and Next-Gen Firewalls (NGFW).
+*   **End Devices:** Securing Laptops, Servers, and the growing IoT attack surface.
+
+### 5. [Security, Monitoring & IR](./Modules/05-Security/)
+*Focus: Identifying and responding to threats.*
+*   **Traffic Monitoring:** SPAN/RSPAN, SNMP, and NetFlow analysis.
+*   **Threat Hunting:** Protocol analysis with Wireshark and detecting malicious traffic patterns.
+
 ---
 
-# Network Protocol Security & Analysis Table
+## 🛡️ Protocol Security & Defensive Analysis Matrix
 
 This table provides a comprehensive overview of common network protocols, their security status, and key focus areas for Blue Team operations.
 
@@ -141,8 +114,13 @@ This table provides a comprehensive overview of common network protocols, their 
 ---
 
 ## 🚀 Project Objectives
-This study aims to demonstrate not only theoretical networking knowledge but also how this knowledge is used in **SOC Analysis**, **Penetration Testing**, and **Network Security** processes.
+This project aims to integrate theoretical networking with practical **SOC Analysis**, **Penetration Testing**, and **Network Security** processes.
 
+# How to use this handbook:
+1.  **Clone the Repo:** Explore the modules in numeric order.
+2.  **Lab Exercises:** Check the `/Labs` folder for PCAP samples and Cisco Packet Tracer files.
+3.  **Contribute:** Contributions to Blue Team hardening guides are welcome!
+   
 ---
 *Prepared by: Kubra Bozdogan*
 
