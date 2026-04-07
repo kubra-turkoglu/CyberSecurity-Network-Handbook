@@ -1,9 +1,8 @@
 # CyberSecurity-Network-Handbook
 Network Fundamentals for BlueTeam
 
+```mermaid
 graph TD
-
-
     A[Network Architecture Documentation] --> B[SOHO Networks]
     A --> C[Enterprise Networks]
     A --> D[WAN Networks]
