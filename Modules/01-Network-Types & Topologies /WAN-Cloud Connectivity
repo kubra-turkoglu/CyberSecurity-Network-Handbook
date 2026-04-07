@@ -67,5 +67,5 @@ When a packet travels across a WAN, its identity changes at the data-link layer:
 WAN and Cloud connectivity offer global reach but represent an **inherently untrusted** environment. The Blue Team's priority is to ensure that no internal asset is exposed to the WAN without encryption (VPN) and strict stateful firewall inspection.
 
 ---
-*Previous Module: [Enterprise & Campus Networks](./Enterprise.md)*  
+*Previous Module: [Enterprise & Campus Networks](./Enterprise & Campus (Medium-Large))*  
 *Next Module: [Hierarchical Architecture](./Modules/02-Architecture/README.md)*
