@@ -43,7 +43,13 @@ graph LR
     style Security fill:#442d2d,stroke:#f85149,color:#fff
 ```
 
-📌 Repository Modules1. Network Types & TopologiesSOHO vs Enterprise: Understanding attack surfaces in different environments.WAN Security: How data travels securely over untrusted links.2. Hierarchical ArchitectureThe 3-Layer Model: Access, Distribution, and Core layers.Network Segmentation: Implementing VLANs and DMZs to contain lateral movement.3. Addressing & ProtocolsIP & Subnetting: Logical boundaries and broadcast domains.Gateway Services: Deep dive into NAT/PAT from a log analysis perspective.Critical Services: Security analysis of ARP, DHCP (DORA), and DNS.4. Network HardwareL2/L3 Devices: How switches and routers make forwarding decisions.Security Appliances: The role of Next-Gen Firewalls and IDS/IPS in the flow.5. Security & MonitoringTraffic Analysis: Mastering Wireshark and PCAP analysis for incident response.Hardening: Applying Access Control Lists (ACLs) and Port Security.
+# 📌 Repository Modules
+
+* **1. Network Types & TopologiesSOHO vs Enterprise:** Understanding attack surfaces in different environments.WAN Security: How data travels securely over untrusted links.
+* **2. Hierarchical ArchitectureThe 3-Layer Model:** Access, Distribution, and Core layers.Network Segmentation: Implementing VLANs and DMZs to contain lateral movement.
+* **3. Addressing & ProtocolsIP & Subnetting:** Logical boundaries and broadcast domains.Gateway Services: Deep dive into NAT/PAT from a log analysis perspective.Critical Services: Security analysis of ARP, DHCP (DORA), and DNS.
+* **4. Network HardwareL2/L3 Devices:** How switches and routers make forwarding decisions.Security Appliances: The role of Next-Gen Firewalls and IDS/IPS in the flow.
+* **5. Security & MonitoringTraffic Analysis:** Mastering Wireshark and PCAP analysis for incident response.Hardening: Applying Access Control Lists (ACLs) and Port Security.
 ---
 
 # Network Protocol Security & Analysis Table
