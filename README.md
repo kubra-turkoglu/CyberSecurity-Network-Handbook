@@ -52,7 +52,7 @@ graph LR
 ```
 ## 📂 Repository Structure & Modules
 
-### 1. [Network Types & Topologies](./Modules/01-Network-Types & Topologies /)
+### 1. [Network Types & Topologies](./Modules/01-Network-Types & Topologies/)
 *Focus: Understanding the attack surface in different environments.*
 *   **SOHO & Remote Office:** Securing basic home/office gateways.
 *   **Enterprise (Campus):** High availability, redundancy, and VLAN security.
