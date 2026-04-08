@@ -64,4 +64,4 @@ As data travels down the layers, it is wrapped in headers, becoming a specific *
 *   **Modular Management:** Organizations can upgrade the "Core" without re-engineering the "Access" layer.
 
 ---
-*Next Module: [Segmentation & DMZ Design](./Security Zones.md)*
+*Next Module: [Segmentation & DMZ Design](./Security-Zones.md)*
