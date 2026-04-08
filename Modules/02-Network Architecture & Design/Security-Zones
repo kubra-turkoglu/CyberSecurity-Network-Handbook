@@ -1,0 +1,63 @@
+# Module 02: Network Architecture
+### 🛡️ Security Zones & Tiered Defense
+
+Security zones and tiers are the structural manifestation of the **Defense-in-Depth** strategy. By implementing layers of control, we ensure that the compromise of a single component does not lead to a total system breach. The fundamental goal here is the **separation of access and data.**
+
+---
+
+## 🏗️ The Core Principle: Separation of Access and Data
+In modern cybersecurity, we assume the perimeter will eventually be breached. Tiering is the primary method used to mitigate the impact of that breach.
+
+*   **Network Level:** Using a **DMZ (Demilitarized Zone)** to isolate internet-facing risks from internal "trusted" assets.
+*   **Application Level:** Using **Multi-tier architectures** to ensure user-facing servers never touch raw data directly.
+
+---
+
+## 🤺 The DMZ (Demilitarized Zone) Strategy
+The DMZ acts as a network perimeter or a "fence" designed to slow down attackers and turn away the unmotivated.
+
+*   **Asset Placement:** 
+    *   **High-Risk Assets:** Web servers, Mail gateways, and Proxy servers are placed *within* the DMZ.
+    *   **High-Impact Assets:** Databases, Active Directory, and File Servers are kept *behind* the DMZ in the Internal Network.
+*   **Tailored Controls:** Tiering allows administrators to apply specific rules to each zone. For example:
+    *   The **Web Tier** is restricted to communication with specific external IPs.
+    *   The **Internal Tier** is the only zone allowed to connect to sensitive authorization servers.
+
+---
+
+## 📊 Comparative Analysis: 2-Tier vs. 3-Tier Security
+
+The leap from 2-tier to 3-tier is one of the most effective ways to reduce the **"Blast Radius"** of a web-based attack.
+
+
+| Feature | 2-Tier Architecture (High Risk) | 3-Tier Architecture (Hardened) |
+| :--- | :--- | :--- |
+| **Data Interaction** | Web-app connects **directly** to the Database. | Web-app connects **only** to the App Layer. |
+| **Logic Location** | Presentation and Business logic are combined. | Dedicated Business/App layer handles logic. |
+| **Primary Risk** | SQL Injection can be used to dump entire user tables. | App Layer acts as a **Whitelist**, returning only "Yes/No" answers. |
+| **Privilege Level** | Requires broad DB permissions. | Enforces the **Principle of Least Privilege**. |
+
+---
+
+## 🏭 Integration in Enterprise Topologies
+In large-scale environments, these security zones are mapped onto the physical hierarchy (**Core-Distribution-Access**).
+
+1.  **Segmentation (VLANs):** Used to isolate departments and tiers. This ensures that a breach in the *Public Wi-Fi* cannot reach the *Server Farm*.
+2.  **Advanced Defensive Tools:**
+    *   **NGFW (Next-Gen Firewalls):** Placed at the edge of the DMZ to perform deep packet inspection.
+    *   **IDS/IPS:** Monitors for signature-based attacks moving between tiers.
+    *   **NAC (Network Access Control):** Ensures only compliant devices can join a specific security zone.
+3.  **Fault Tolerance:** Redundancy is prioritized so that if a security appliance in the DMZ fails, the "Availability" of the service is maintained.
+
+---
+
+## 🔍 Strategic Risk Assessment (Blue Team Note)
+Implementing security zones must be driven by **Threat Modeling**. Analysts must constantly ask:
+*   *"If this specific control (e.g., the DMZ Firewall) fails, what is the impact?"*
+*   *"What other controls must fail for an attacker to reach the Data Tier?"*
+
+While a DMZ fence slows down persistent attackers, it is rarely sufficient on its own. True security requires the combination of network-level segmentation (DMZ) and application-level tiering (3-Tier).
+
+---
+*Previous Module: [Hierarchical Layers](./Hierarchical-Layers.md)*  
+*Next Module: [03 - Addressing & Protocols](./Modules/03-Protocols/)*
