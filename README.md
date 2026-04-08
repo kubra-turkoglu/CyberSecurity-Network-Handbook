@@ -85,12 +85,17 @@ graph LR
 
 This table provides a comprehensive overview of common network protocols, their security status, and key focus areas for Blue Team operations.
 
+# Network Protocol Security & Analysis Table
+
+A comprehensive security overview for common network protocols, optimized for Blue Team documentation.
+
 
 | Protocol | Port | Layer | Security Status | Blue Team Focus | Attack Vector |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **ARP** | - | L2 | 🔴 Unencrypted | Dynamic ARP Inspection (DAI) / Static Tables | ARP Poisoning / MITM |
 | **ICMP** | - | L3 | 🟠 No Auth | ICMP Tunneling Detection / Rate Limiting | Ping of Death / Smurf DoS |
-| **TCP** | - | L4 | 🟡 Connection-oriented | 3-Way Handshake Monitoring / SYN Analysis | SYN Flood / Session Hijacking |
+| **TCP** | - | L4 (Trans) | 🟡 Connection-oriented | 3-Way Handshake Monitoring / SYN Analysis | SYN Flood / Session Hijacking |
+| **UDP** | - | L4 (Trans) | 🔴 Connectionless | Spoofed Source IP Filtering / Traffic Volumetrics | UDP Flood / Reflection / Amplification |
 | **DHCP** | 67/68 | L7 (App) | 🟠 Unencrypted | DHCP Snooping / Port Security | Rogue DHCP / Starvation |
 | **DNS** | 53 | L7 (App) | 🟠 Poisoning Risk | Query Logging / DNSSEC / Tunneling Check | Cache Poisoning / Exfiltration |
 | **FTP** | 21 | L7 (App) | 🔴 Unencrypted | Disable Anonymous / Monitor Cleartext | vsftpd Backdoor / Sniffing |
@@ -106,10 +111,10 @@ This table provides a comprehensive overview of common network protocols, their 
 | **RDP** | 3389 | L7 (App) | 🟠 Vulnerable | Network Level Auth (NLA) / VPN Only | BlueKeep / Brute Force |
 
 ### Legend
-*   🟢 **Secure**: Encrypted by default.
-*   🟡 **Neutral**: Depends on configuration (e.g., STARTTLS).
-*   🟠 **Weak**: Lacks inherent authentication or encryption.
-*   🔴 **Critical**: Transmits data in cleartext or highly vulnerable.
+*   🟢 **Secure**: Encrypted by default (SSH, HTTPS, etc.).
+*   🟡 **Neutral**: Security depends on configuration (TCP, SMTP, etc.).
+*   🟠 **Weak**: Lacks inherent encryption or authentication (DNS, RDP, etc.).
+*   🔴 **Critical**: High risk; transmits data in cleartext or easily spoofed (Telnet, FTP, UDP, etc.).
 
 ---
 
