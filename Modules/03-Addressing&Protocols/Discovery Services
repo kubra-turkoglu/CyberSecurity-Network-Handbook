@@ -1,0 +1,100 @@
+# Discovery Services & Protocols
+
+## 1. Overview
+Discovery protocols serve as the critical "glue" within a network architecture. They allow devices to translate between human-readable names, logical IP addresses, and physical hardware addresses to facilitate communication across various layers of the OSI model.
+
+---
+
+## 2. Core Discovery Protocols
+
+### DNS (Domain Name System): Domain to IP
+*   **Purpose:** Operates at the **Application Layer (Layer 7)** to translate human-friendly domain names (e.g., `www.google.com`) into numerical IP addresses required for routing.
+*   **Protocol Details:** Primarily utilizes **UDP Port 53**, though it can use TCP for zone transfers or large responses.
+*   **Architectural Role:** In enterprise environments, DNS is centrally managed to ensure consistent name resolution across thousands of devices.
+
+### DHCP (Dynamic Host Configuration Protocol): IP Assignment
+Before a device can communicate, it must acquire a logical address via the **DORA Process**:
+1.  **Discover:** The client broadcasts a message (`Source IP 0.0.0.0`, `Destination 255.255.255.255`) to find available DHCP servers.
+2.  **Offer:** A server responds with a proposal (IP address, Subnet Mask, Default Gateway, and DNS).
+3.  **Request:** The client broadcasts its acceptance, notifying other servers to release their temporary reservations.
+4.  **Acknowledgement (ACK):** The server finalizes the IP-to-MAC binding in its stateful database.
+
+### ARP (Address Resolution Protocol): IP to MAC
+*   **Mechanism:** Operates at the **Network Layer (Layer 3)** to discover the **Link Layer (Layer 2)** MAC address associated with a known IPv4 address.
+*   **Local Communication:** 
+    *   On the same subnet: Devices resolve each other's MAC addresses directly.
+    *   On different subnets: The sender uses ARP to find the MAC address of its **Default Gateway** (router).
+*   **Broadcast Nature:** Requests are sent to the broadcast MAC (`FF:FF:FF:FF:FF:FF`) because the sender does not yet know which physical port the target IP is connected to.
+
+---
+
+## 3. Service and Resource Discovery
+Beyond basic addressing, specialized protocols locate network capabilities:
+*   **UPnP (Universal Plug and Play):** Uses **UDP Port 1900** for automated discovery of devices (like printers or media servers) on a local network.
+*   **NetBIOS Name Service:** Operates on **Port 137** to discover and register names for resource sharing in Windows environments.
+*   **MSDP (Multicast Source Discovery Protocol):** Uses **Port 639** to discover multicast sources across different domains.
+
+---
+
+## 4. The Role of Hardware in Discovery
+*   **Switches and Broadcast Domains:** Switches forward discovery broadcasts to every port within a broadcast domain to ensure the request reaches the intended target.
+*   **MAC Learning:** While protocols search for destinations, switches perform their own discovery by inspecting the **Source MAC** field of incoming frames to build their MAC Address Tables.
+
+---
+
+## 5. Strategic Context & Security Implications
+
+### Addressing Rules
+*   **IP Addresses** indicate the final destination (constant throughout the journey).
+*   **MAC Addresses** indicate the "next hop" (changing at every router/hop as ARP facilitates the transition between segments).
+
+### Cybersecurity Perspective: Reconnaissance & Attacks
+Discovery is often the first phase of an attack, known as **Reconnaissance** or **Enumeration**.
+*   **Host Discovery:** Tools like **Nmap** probe networks for active hosts and open ports.
+*   **Vulnerabilities:**
+    *   **Rogue DHCP Servers:** Can respond to discovery requests to perform Man-in-the-Middle (MITM) attacks.
+    *   **ARP Spoofing/Poisoning:** Misdirects discovery results to intercept traffic.
+    *   **MAC Flooding:** Attackers flood a switch with fake MACs to exhaust its memory, forcing it to broadcast all traffic (turning it into a "hub") and exposing data to packet analyzers.
+
+### Defensive Measures
+To mitigate discovery-based attacks, architectures implement:
+*   **DHCP Snooping:** Only allowing DHCP responses from trusted ports.
+*   **Dynamic ARP Inspection (DAI):** Validating ARP packets against a trusted database.
+*   **Port Security:** Limiting the number of MAC addresses allowed on a single switch port.
+
+## 6. Deep Dive: Security Vulnerabilities & MITM
+From a cybersecurity perspective, discovery protocols are primary targets during the **Reconnaissance** phase because they rely on unauthenticated broadcasts to function.
+
+### ARP: The Gateway to Man-in-the-Middle (MITM)
+*   **The Mechanism:** A device broadcasts "Who has this IP?" to find the physical MAC address on a subnet.
+*   **The MITM Vulnerability:** ARP is a trust-based, unauthenticated protocol. 
+    *   **ARP Spoofing/Poisoning:** An attacker sends a fake ARP reply to associate their own MAC address with a legitimate IP (such as the Default Gateway).
+*   **Impact:** This allows an attacker to capture, sniff, or modify sensitive data between two hosts. It is often used after a **MAC Flooding** attack to maintain persistence.
+
+### DHCP: Rogue Servers and Snooping
+*   **The Vulnerability:** Because the DORA process begins with broadcasts, the network is susceptible to:
+    *   **Rogue DHCP Servers:** An attacker provides victims with a malicious Default Gateway or DNS server.
+    *   **Starvation Attacks:** Flooding the server with requests to exhaust the IP pool.
+*   **Defense (DHCP Snooping):** A Layer 2 security feature where the switch builds a "binding table." It only permits DHCP responses from **trusted ports** (where the real server lives) and blocks unauthorized offers.
+
+### DNS: Cache Poisoning and Data Risks
+*   **Security Risks:**
+    *   **Cache Poisoning:** Redirecting users to malicious sites by supplying false IP data to a resolver.
+    *   **Unauthorized Zone Transfers (AXFR):** Can leak the entire internal network topology to an attacker.
+    *   **Amplification DDoS:** Leveraging DNS to overwhelm a target with large volumes of traffic.
+*   **Hardening:** Disabling recursion where not needed, restricting zone transfers, and implementing **DNSSEC** to ensure data integrity.
+
+---
+
+## 7. Strategic Context in Network Architecture
+
+### The Rule of Delivery
+*   **IP addresses** define the **final destination**.
+*   **MAC addresses** define the **next hop**.
+*   **Address Persistence:** Throughout the journey, Source/Destination IPs stay constant, while MAC addresses are discarded and replaced at every router (hop).
+
+### Layered Defense
+Because discovery protocols are inherently "open," they must be shielded by:
+1.  **Port Security:** Limiting MAC addresses per port.
+2.  **DHCP Snooping & DAI:** Protecting the integrity of the address assignment and resolution.
+3.  **Next-Generation Firewalls (NGFW):** Monitoring for anomalies in discovery traffic to prevent network mapping or interception.
