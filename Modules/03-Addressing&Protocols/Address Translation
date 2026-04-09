@@ -1,0 +1,44 @@
+# Address Translation (NAT/PAT)
+
+## 1. Overview
+In the larger context of network architecture, Address Translation services function as a critical bridge between private local networks (LAN) and the public internet (WAN). Because private IP addresses are not routable on the global internet, these services are essential for connectivity. 
+
+### Operational Layers
+*   **Network Layer (Layer 3):** Used for standard IP-to-IP translation.
+*   **Transport Layer (Layer 4):** Used when translation involves port numbers to distinguish between multiple internal hosts.
+
+---
+
+## 2. Primary Translation Methods
+
+### Static NAT (One-to-One Mapping)
+*   **Mechanism:** Permanently maps one private IP address to one specific public IP address.
+*   **Use Case:** Used when an internal device, such as a web server, needs to be consistently accessible from the internet.
+*   **Security Implications:** While it allows for inbound connectivity, it effectively increases the **attack surface** by making the internal device visible and reachable to any external entity. It is a permanent target for reconnaissance and direct attacks.
+
+### Dynamic NAT (Pool-Based Mapping)
+*   **Mechanism:** Private IP addresses are mapped to a public IP from a pre-configured group or "pool." It maintains a one-to-one mapping during a session, but the public address is assigned dynamically upon request.
+*   **Security Implications:** Once a session ends, the public IP returns to the pool. This offers slightly more privacy than static mapping by making internal devices harder to track over time, though it does not hide the internal network structure as effectively as PAT.
+*   **Constraint:** It is limited by the number of available public IPs in the pool.
+
+### PAT / NAT Overload (Many-to-One Mapping)
+*   **Mechanism:** Port Address Translation (PAT) is the most common form of translation, allowing thousands of internal devices to share a single public IP address.
+*   **The Role of Ports:** To distinguish between different internal devices, the router changes the source port of outgoing packets to a unique identifier (e.g., PC A maps to `PublicIP:50000`, while PC B maps to `PublicIP:50001`).
+*   **Security Advantages:**
+    *   **Obfuscation:** External actors see only the router’s single public IP, hiding the internal network's structure, total device count, and specific identities.
+    *   **Inbound Protection:** The router only forwards incoming data if it matches an existing entry in its stateful translation table. This inherently blocks unsolicited external traffic from reaching internal devices.
+
+---
+
+## 3. Strategic Integration in Network Architecture
+
+### IP Conservation
+The primary non-security goal of PAT is to resolve the global shortage of public IPv4 addresses, allowing both SOHO (Small Office/Home Office) and large enterprise environments to operate using minimal public IP resources.
+
+### Layered Defense & Tiered Architecture
+In a **3-tier architecture**, translation is applied strategically:
+*   **DMZ / Web Tier:** Static NAT is typically applied here to ensure high-risk assets (like web servers) are reachable by the public.
+*   **Access Layer:** PAT is used for general users to provide internet access while maintaining maximum internal privacy and protection.
+
+### Addressing Persistence
+Throughout the translation and routing process, the original **Source and Destination IP addresses** stay constant for the entire journey from the gateway to the final destination to ensure data reaches the correct application, even though the **MAC addresses** change at every router (hop).
