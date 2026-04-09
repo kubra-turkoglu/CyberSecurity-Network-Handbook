@@ -36,62 +36,20 @@ graph LR
     Proto --> L3[IP Addressing: Classes A-B-C]
     Proto --> Services[Translation: Static/Dynamic NAT / PAT]
     Proto --> Discovery[Discovery: ARP / DHCP / DNS]
+    Proto --> Concepts[Key Concepts]
+    Concepts --- C1[MAC Address Table: L2 Forwarding]
+    Concepts --- C2[Default Gateway: Exit Points]
 
     %% Hardware (Görsel Destekli)
-    Hardware --> Inter[Intermediate: L2-L3 Switches / Firewalls / WAPs]
+    Hardware --> Inter[Intermediate Devices]
+    Inter --> L2SW[L2 Switches: VLANs & Port Security]
+    Inter --> L3SW[L3 Switches & Routers: Inter-VLAN Routing]
+    Inter --> FW[Firewalls: NGFW & IPS/IDS]
     Hardware --> End[End Devices: PC-Laptops / Servers / IoT]
 
     %% Security (Blue Team Fokus)
     Security --> Analysis[Monitoring: SPAN / NetFlow / SNMP]
     Security --> Defense[Analysis: Wireshark / Malicious Flow / IR]
-
-    %% Styling
-    style Main fill:#2d333b,stroke:#58a6ff,color:#fff
-    style Security fill:#442d2d,stroke:#f85149,color:#fff
-    style Arch fill:#1f3d3d,stroke:#3fb950,color:#fff
-```
-
-second
-```mermaid
-graph LR
-    %% Main Node
-    Main[Network Fundamentals for Cybersecurity] --> Types[Network Types]
-    Main --> Arch[Network Architecture]
-    Main --> Proto[Addressing & Protocols]
-    Main --> Hardware[Network Hardware]
-    Main --> Security[Security & Monitoring]
-
-    %% Network Types
-    Types --> SOHO[SOHO & Home Office]
-    Types --> Enterprise[Medium / Large / Campus]
-    Types --> WAN[WAN & Cloud Connectivity]
-    SOHO --- S1[Basic Routers/APs]
-    Enterprise --- E1[VLAN Segmentation / Redundant Paths]
-
-    %% Architecture
-    Arch --> Layers[Hierarchical Layers]
-    Layers --> L1[Core / Distribution / Access]
-    Arch --> Seg[Security Zones]
-    Seg --> DMZ[DMZ / Trusted / Untrusted]
-
-    %% Protocols & Key Concepts
-    Proto --> L3[IP Fundamentals: IPv4 & Classes]
-    Proto --> Services[Translation: NAT / PAT / Obfuscation]
-    Proto --> Discovery[Discovery: ARP / DHCP / DNS]
-    Proto --> Concepts[Key Concepts]
-    Concepts --- C1[MAC Address Table: L2 Forwarding]
-    Concepts --- C2[Default Gateway: Exit Points]
-
-    %% Hardware (L2/L3 Focus)
-    Hardware --> Inter[Intermediate Devices]
-    Inter --> L2SW[L2 Switches: VLANs & Port Security]
-    Inter --> L3SW[L3 Switches & Routers: Inter-VLAN Routing]
-    Inter --> FW[Firewalls: NGFW & IPS/IDS]
-    Hardware --> End[End Devices: PC / Servers / IoT]
-
-    %% Security & Blue Team
-    Security --> Analysis[Monitoring: SPAN / NetFlow / SNMP]
-    Security --> Defense[Security Analysis: Malicious Flow / IR]
     Security --> Attacks[Common Threats]
     Attacks --- A1[MITM / ARP Spoofing]
     Attacks --- A2[VLAN Hopping / Lateral Movement]
