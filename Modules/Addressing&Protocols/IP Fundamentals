@@ -1,1 +1,62 @@
+# IP Fundamentals & Network Architecture
+
+## 1. Introduction to IP Addressing
+An IP address (Internet Protocol address) is a unique 32-bit numerical label assigned to each device on a network, acting as its "street address" for the entire journey of a data packet. Within the larger framework of Network Architecture, IP addressing operates at the **Network Layer (Layer 3)** and is critical for routing traffic between different networks, such as connecting a local LAN to the global WAN via routers.
+
+### IPv4 Address Classes and Structure
+IPv4 addresses are traditionally categorized into five classes based on their first octet, which determines the network size and the default subnet mask:
+
+*   **Class A (1–126):** Uses a default mask of `255.0.0.0` (/8); designed for very large networks.
+*   **Class B (128–191):** Uses a default mask of `255.255.0.0` (/16); used for medium-sized networks.
+*   **Class C (192–223):** Uses a default mask of `255.255.255.0` (/24); common for small local networks.
+*   **Class D (224–239):** Reserved for Multicast traffic.
+*   **Class E (240–255):** Reserved for experimental purposes.
+*   **Loopback (127.0.0.x):** Specifically `127.0.0.1` is used for a device to "ping" itself to test its own network stack; it cannot be reached from the outside.
+
+---
+
+## 2. Public vs. Private Addressing
+In modern architecture, a clear distinction is made between addresses used internally and those exposed to the internet.
+
+*   **Private IP Addresses:** These are designated ranges (`10.0.0.0/8`, `172.16.0.0/12`, and `192.168.0.0/16`) used within a local network (LAN) and are not allowed on the public internet.
+*   **Public IP Addresses:** These are unique global addresses assigned by ISPs to routers, allowing a local network to communicate with the world.
+*   **NAT and PAT:** Because private IPs cannot route globally, a process called **Network Address Translation (NAT)** is used to map private IPs to a public one. **Port Address Translation (PAT)**, or NAT Overload, allows thousands of internal devices to share a single public IP by using unique Port Numbers as identifiers.
+
+---
+
+## 3. Static vs. Dynamic IP Addressing
+Network administrators choose between two methods for assigning IP addresses based on the device's role in the architecture:
+
+*   **Static IP Addressing:** Manually configured by an administrator. This is essential for servers, printers, and networking hardware because these devices must be consistently accessible to clients at a fixed address.
+*   **Dynamic IP Addressing:** Automatically assigned via the **DHCP** (Dynamic Host Configuration Protocol) using the DORA process (Discover, Offer, Request, ACK). This reduces manual management for end-user devices like laptops and smartphones.
+
+---
+
+## 4. IP in Network Architecture
+IP addressing provides the logical foundation for end-to-end communication across diverse topologies:
+
+*   **End-to-End Consistency:** While MAC addresses change at every router (hop), the Source and Destination IP addresses stay constant for the entire journey from sender to receiver.
+*   **Routing Decisions:** Routers use the IP header to consult routing protocols (like OSPF or BGP) and determine the "best path" to the final destination.
+*   **Enterprise Segmentation:** In medium to large networks, IP fundamentals are used to create VLANs (Virtual LANs) for network segmentation, improving security by limiting the "blast radius" of potential attacks.
+
+---
+
+## 5. Network Security Tiering (Contextual Application)
+In the larger context of network architecture, security tiers function as a strategic framework designed to protect high-impact assets by implementing "layers of control." From a cybersecurity perspective, the primary objective of tiering is not merely the addition of hardware, but the fundamental separation of access and data.
+
+### 1. Application-Level Tiering: 2-Tier vs. 3-Tier
+*   **2-Tier Architecture:** A web server handles both presentation and business logic and connects directly to the database. Risk: If the web server is compromised, an attacker could potentially modify or create new queries to retrieve entire tables, such as hashed password lists.
+*   **3-Tier Architecture:** Introduces a dedicated application or business layer between the web tier and the data tier. The web server no longer has direct access to the database; instead, it sends specific requests (e.g., "validate this user") to the application layer and receives a simple "yes/no" answer.
+
+### 2. Strategic Cybersecurity Benefits
+*   **Controlled Whitelisting:** The application layer acts as a whitelist, strictly limiting the types of operations the web-app can perform regarding data access.
+*   **Principle of Least Privilege:** Tiering limits the responsibility and access rights of each component, ensuring that even if one tier is breached, the attacker lacks direct access to underlying data structures.
+*   **Tailored Controls:** Administrators can apply specific security measures to each tier. For instance, the web tier can be restricted to communicate only with limited IP addresses, while the business tier is permitted to connect to internal authorization servers.
+
+### 3. Network-Level Tiering and Perimeter Security
+*   **DMZ (Demilitarized Zone):** Serves as the "initial contact point with the world" where internet-facing servers are isolated. While the DMZ acts like a fence to slow down attackers and turn away the unmotivated, it is most effective when high-risk assets are separated from high-impact internal data.
+*   **Hierarchical Enterprise Topology:** Large networks utilize a **Core – Distribution – Access** multi-tier architecture. This structure allows for advanced defense-in-depth strategies, such as VLAN segmentation to limit lateral movement and the deployment of professional tools like Next-Generation Firewalls (NGFW) and IDS/IPS at strategic points.
+
+### 4. Risk and Mitigation Strategy
+Security and risk management in tiered architectures are about mitigating the likelihood and impact of adverse events. A tiered design ensures that if one control fails, other layers remain to protect the asset. When designing these systems, organizations must evaluate the impact if a control fails, the likelihood of that combination failing, and where the most high-impact assets reside within the architecture.
 
