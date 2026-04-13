@@ -18,7 +18,20 @@ Before a device can communicate, it must acquire a logical address via the **DOR
 2.  **Offer:** A server responds with a proposal (IP address, Subnet Mask, Default Gateway, and DNS).
 3.  **Request:** The client broadcasts its acceptance, notifying other servers to release their temporary reservations.
 4.  **Acknowledgement (ACK):** The server finalizes the IP-to-MAC binding in its stateful database.
-
+```mermaid
+sequenceDiagram
+    participant Client
+    participant DHCPServer as DHCP Server
+    Client->>DHCPServer: DISCOVER (Broadcast)
+    activate DHCPServer
+    DHCPServer-->>Client: OFFER (IP Pool Offered)
+    deactivate DHCPServer
+    Client->>DHCPServer: REQUEST (Accept Offer)
+    activate DHCPServer
+    DHCPServer-->>Client: ACK (IP Assigned)
+    deactivate DHCPServer
+    Note over Client,DHCPServer: DORA Process Complete
+```
 ### ARP (Address Resolution Protocol): IP to MAC
 *   **Mechanism:** Operates at the **Network Layer (Layer 3)** to discover the **Link Layer (Layer 2)** MAC address associated with a known IPv4 address.
 *   **Local Communication:** 
